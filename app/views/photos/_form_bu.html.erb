@@ -1,0 +1,155 @@
+<%= form_for [@current_user, @photo], :remote => true do |f| %>
+
+    <% if @photo.id != nil %>
+        <!-- ======= ======= ======= photo column ======= ======= =======   -->
+        <div class="column column-6 photo-column">
+            <div><%= image_tag @photo.source,  class: "current-photo", alt: @photo.title %></div>
+            <div class="caption"><%= @photo.caption %></div>
+        </div>
+
+        <!-- ======= ======= ======= data column ======= ======= =======   -->
+        <div class="column column-6 data-column">
+
+    <% else %>
+
+        <!-- ======= ======= ======= new-photo column ======= ======= =======   -->
+        <div class="column column-6 new-photo-column">
+    <% end %>
+
+            <!-- ======= ======= ======= tags ======= ======= =======   -->
+            <div class="tag-edits photo-form">
+                <div class="formData"><p class="formLabel">source</p><%= f.text_field :source, size: "30" %></div>
+                <div class="formData"><p class="formLabel">title</p><%= f.text_field :title, size: "25" %> </div>
+                <div class="formData"><p class="formLabel">location</p><%= f.text_field :loc_taken, size: "20" %></div>
+                <div class="formData"><p class="formLabel">date</p><%= f.text_field :date_taken, size: "15" %></div>
+                <div class="formData"><p class="formLabel">wt/ht</p><%= f.text_field :wt_ht, size: "10" %></div>
+                <div class="formData"><p class="formLabel">rating</p><%= f.text_field :rating, size: "2" %></div>
+
+                <div class="formData"><p class="formLabel">caption</p><%= f.text_area :caption, cols: "30", rows: "7" %></div>
+                <div class="formData"><p class="formLabel">&nbsp;</p><%= f.hidden_field :photo_id, value: @photo.id %></div>
+            </div>
+
+    <% if @photo.id == nil %>
+        </div><div class="column column-6 new-photo-column">
+    <% end %>
+
+            <!-- ======= ======= ======= genres ======= ======= =======   -->
+            <div class="tag-edits genre">
+                <p class="tag-title">genre</p>
+                <% if @genres %>
+                    <ul class="tag-list">
+                        <% tagFlag = false %>
+                        <% @genres.each do |genre| %>
+                            <% nextTag = genre.name %>
+                            <% if @genres_checked %>
+                                <% @genres_checked.each do |checked| %>
+                                    <% nextChecked = checked.name %>
+                                    <% if nextChecked == nextTag %>
+                                        <li class="cat-select">
+                                            <%= f.fields_for 'genre[]', [] do |g| %>
+                                                <%= g.check_box(genre.name, options = {:checked => true}, checked_value = "1", unchecked_value = "0") %>
+                                            <% end %>
+                                            <%#= f.check_box("genre_" + genre.name, options = {:checked => true}, checked_value = "1", unchecked_value = "0") %>
+                                        <label for="genre"><%= genre.name %></label</li>
+                                        <% tagFlag = true %>
+                                        <% break %>
+                                    <% end %>
+                                <% end %>
+                            <% end %>
+                            <% if tagFlag == false %>
+                                <li class="cat-select">
+                                    <%= f.fields_for 'genre[]', [] do |g| %>
+                                        <%= g.check_box(genre.name, options = {:checked => false}, checked_value = "1", unchecked_value = "0") %>
+                                        <%#= f.check_box("genre_" + genre.name, options = {:checked => false}, checked_value = "1", unchecked_value = "0") %>
+                                    <% end %>
+                                <label for="genre"><%= genre.name %></label</li>
+                            <% end %>
+                            <% tagFlag = false %>
+                        <% end %>
+                    </ul>
+                <% else %>
+                    <p>no tags created yet</p>
+                <% end %>
+            </div>
+
+            <!-- ======= ======= ======= groups ======= ======= =======   -->
+            <div class="tag-edits group">
+                <p class="tag-title">group</p>
+                <% if @groups %>
+                    <ul class="tag-list">
+                        <% tagFlag = false %>
+                        <% @groups.each do |group| %>
+                            <% nextTag = group.name %>
+                            <% if @groups_checked %>
+                                <% @groups_checked.each do |checked| %>
+                                    <% nextChecked = checked.name %>
+                                    <% if nextChecked == nextTag %>
+                                        <li class="cat-select">
+                                            <%= f.check_box("group_" + group.name, options = {:checked => true}, checked_value = "1", unchecked_value = "0") %>
+                                        <label for="group"><%= group.name %></label</li>
+                                        <% tagFlag = true %>
+                                        <% break %>
+                                    <% end %>
+                                <% end %>
+                            <% end %>
+                            <% if tagFlag == false %>
+                                <li class="cat-select">
+                                    <%= f.check_box("group_" + group.name, options = {:checked => false}, checked_value = "1", unchecked_value = "0") %>
+                                <label for="group"><%= group.name %></label</li>
+                            <% end %>
+                            <% tagFlag = false %>
+                        <% end %>
+                    </ul>
+                <% else %>
+                    <p>no tags created yet</p>
+                <% end %>
+            </div>
+
+            <!-- ======= ======= ======= tags ======= ======= =======   -->
+            <div class="tag-edits tag">
+                <p class="tag-title">tag</p>
+                <% if @tags %>
+                    <ul class="tag-list">
+                        <% tagFlag = false %>
+                        <% @tags.each do |tag| %>
+                            <% nextTag = tag.name %>
+                            <% if @tags_checked %>
+                                <% @tags_checked.each do |checked| %>
+                                    <% nextChecked = checked.name %>
+                                    <% if nextChecked == nextTag %>
+                                        <li class="cat-select">
+                                            <%= f.check_box("tag_" + tag.name, options = {:checked => true}, checked_value = "1", unchecked_value = "0") %>
+                                        <label for="tag"><%= tag.name %></label</li>
+                                        <% tagFlag = true %>
+                                        <% break %>
+                                    <% end %>
+                                <% end %>
+                            <% end %>
+                            <% if tagFlag == false %>
+                                <li class="cat-select">
+                                    <%= f.check_box("tag_" + tag.name, options = {:checked => false}, checked_value = "1", unchecked_value = "0") %>
+                                <label for="tag"><%= tag.name %></label</li>
+                            <% end %>
+                            <% tagFlag = false %>
+                        <% end %>
+                    </ul>
+                <% else %>
+                    <p>no tags created yet</p>
+                <% end %>
+            </div>
+
+            <% if @photo.errors.any? %>
+                <div id="error_explanation">
+                    <h2><%= pluralize(@photo.errors.count, "error") %> prohibited photo from being saved:</h2>
+                    <ul>
+                        <% @photo.errors.full_messages.each do |msg| %>
+                            <li><%= msg %></li>
+                        <% end %>
+                    </ul>
+                </div>
+            <% end %>
+        </div>
+    <% if @photo.id != nil %>
+        </div>
+    <% end %>
+<% end %>

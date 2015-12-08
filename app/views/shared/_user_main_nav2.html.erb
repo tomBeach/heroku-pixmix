@@ -1,0 +1,21 @@
+<!-- ======= ======= ======= content_for ======= ======= ======= -->
+<% content_for :user_main_nav2 do %>
+    <% puts "******* _user_main_nav2 " + "*" * 21 %>
+    <% puts "     ** @mode " + @mode.to_s %>
+
+    <ul class="usernav bordered">
+        <% if @mode == "guest" || @mode == "signup" %>
+            <li><%= link_to 'login', login_path, id: "loginOut", class: "nav-link" %></li>
+            <li><%= link_to 'signup', signup_path, class: "nav-link" %></li>
+        <% else%>
+            <li><%= link_to 'logout', logout_path, class: "nav-link" %></li>
+            <li><a data-no-turbolink="true" href='javascript:void(0)' class="nav-link" id="user" >user</a>
+                <ul>
+                    <li><%= link_to 'profile', user_path(@current_user), class: "nav-link" %></li>
+                    <li><%= link_to 'users', users_path, class: "nav-link" %></li>
+                    <li><%= link_to 'new', new_user_path, class: "nav-link action", id: "add-user" %></li>
+                </ul>
+            </li>
+        <% end %>
+    </ul>
+<% end %>

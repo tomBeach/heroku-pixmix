@@ -1,0 +1,101 @@
+<!-- ======= ======= ======= photo column ======= ======= =======   -->
+<div class="column column-6 photo-column">
+    <div><%= image_tag @photo.source,  class: "current-photo", alt: @photo.title %></div>
+    <div class="caption"><%= @photo.caption %></div>
+</div>
+
+<%# binding.pry %>
+
+<!-- ======= ======= ======= data column ======= ======= =======   -->
+<div class="column column-6 data-column">
+    <form action="#">
+
+        <!-- ======= ======= ======= genres ======= ======= =======   -->
+        <div class="tag-edits genre">
+            <p class="tag-title">genre</p>
+            <% if @genres %>
+                <ul class="tag-list">
+                    <% tagFlag = false %>
+                    <% @genres.each do |genre| %>
+                        <% nextTag = genre.name %>
+                        <% if @genres_checked %>
+                            <% @genres_checked.each do |checked| %>
+                                <% nextChecked = checked.name %>
+                                <% if nextChecked == nextTag %>
+                                    <li class="cat-select"><%= check_box_tag("genre", value="1", checked=true) %><label for="test1"><%= genre.name %></label</li>
+                                    <% tagFlag = true %>
+                                    <% break %>
+                                <% end %>
+                            <% end %>
+                            <% if tagFlag == false %>
+                                <li class="cat-select"><%= check_box_tag("genre", value="0", checked=false) %><label for="test1"><%= genre.name %></label</li>
+                            <% end %>
+                        <% end %>
+                        <% tagFlag = false %>
+                    <% end %>
+                </ul>
+            <% else %>
+                <p>no tags created yet</p>
+            <% end %>
+        </div>
+
+        <!-- ======= ======= ======= groups ======= ======= =======   -->
+        <div class="tag-edits group">
+            <p class="tag-title">group</p>
+            <% if @groups %>
+                <ul class="tag-list">
+                    <% tagFlag = false %>
+                    <% @groups.each do |group| %>
+                        <% nextTag = group.name %>
+                        <% if @groups_checked %>
+                            <% @groups_checked.each do |checked| %>
+                                <% nextChecked = checked.name %>
+                                <% if nextChecked == nextTag %>
+                                    <li class="cat-select"><%= check_box_tag("group", value="1", checked=true) %><label for="test1"><%= group.name %></label</li>
+                                    <% tagFlag = true %>
+                                    <% break %>
+                                <% end %>
+                            <% end %>
+                            <% if tagFlag == false %>
+                                <li class="cat-select"><%= check_box_tag("group", value="0", checked=false) %><label for="test1"><%= group.name %></label</li>
+                            <% end %>
+                        <% end %>
+                        <% tagFlag = false %>
+                    <% end %>
+                </ul>
+            <% else %>
+                <p>no tags created yet</p>
+            <% end %>
+        </div>
+
+        <!-- ======= ======= ======= tags ======= ======= =======   -->
+        <div class="tag-edits tag">
+            <p class="tag-title">tag</p>
+            <% if @tags %>
+                <ul class="tag-list">
+                    <% tagFlag = false %>
+                    <% @tags.each do |tag| %>
+                        <% nextTag = tag.name %>
+                        <% if @tags_checked %>
+                            <% @tags_checked.each do |checked| %>
+                                <% nextChecked = checked.name %>
+                                <% if nextChecked == nextTag %>
+                                    <li class="cat-select"><%= check_box_tag("tag", value="1", checked=true) %><label for="test1"><%= tag.name %></label</li>
+                                    <% tagFlag = true %>
+                                    <% break %>
+                                <% end %>
+                            <% end %>
+                            <% if tagFlag == false %>
+                                <li class="cat-select"><%= check_box_tag("tag", value="0", checked=false) %><label for="test1"><%= tag.name %></label</li>
+                            <% end %>
+                        <% end %>
+                        <% tagFlag = false %>
+                    <% end %>
+                </ul>
+            <% else %>
+                <p>no tags created yet</p>
+            <% end %>
+        </div>
+
+    </form>
+</div>

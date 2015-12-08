@@ -1,0 +1,17 @@
+<% @page_title = "All Users" %>
+
+<div class="form-column users">
+    <h1>All Users</h1>
+    <% if @users.length > 0 %>
+        <% @users.each do |user| %>
+            <div class="tag-edits photo-form">
+                <div class="formData"><p class="formLabel">user name</p><%= link_to user.user_name, user_path(user) %></div>
+                <div class="formData"><p class="formLabel">first name</p><%= user.first_name %></div>
+                <div class="formData"><p class="formLabel">last name</p><%= user.last_name %></div>
+                <div class="formData"><p class="formLabel">last name</p><%= user.email %></div>
+                <div class="formData"><p class="formLabel">&nbsp;</p></div>
+            </div>
+            <div class="formData"><p class="formLabel">&nbsp;</p></div>
+        <% end %>
+    <% end %>
+</div>

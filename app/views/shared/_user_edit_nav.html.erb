@@ -1,0 +1,50 @@
+<!-- ======= ======= ======= content_for ======= ======= ======= -->
+<% content_for :user_edit_nav do %>
+    <% puts "******* user_edit_nav " + "*" * 21 %>
+    <% puts "     ** @mode " + @mode.to_s %>
+
+    <% if @photo and @current_user %>
+        <% if @mode == "edit" %>
+            <li><a href="#" class="edit-link" id="back">back</a></li>
+            <!-- <li><a href="#" class="edit-link" id="updatePhoto">save</a></li> -->
+            <li><%= link_to 'save', user_photo_path(@current_user, @photo), method: :patch, id: "updatePhoto", class: "edit-link" %></li>
+            <li><%= link_to 'delete', user_photo_path(@current_user, @photo), method: :delete, id: "deletePhoto", class: "edit-link" %></li>
+            <script type="text/javascript">
+                $("#edit-nav").addClass("bordered");
+            </script>
+        <% elsif @mode == "show" %>
+            <% puts "     ** sidebar_menu -- show" %>
+            <li><a href="#" class="edit-link" id="back">back</a></li>
+            <li><%= link_to 'edit', edit_user_photo_path(@current_user, @photo), id: "editPhoto", class: "edit-link" %></li>
+            <li><%= link_to 'delete', user_photo_path(@current_user, @photo), method: :delete, id: "deletePhoto", class: "edit-link" %></li>
+            <script type="text/javascript">
+                $("#edit-nav").addClass("bordered");
+            </script>
+        <% elsif @mode == nil %>
+            <script type="text/javascript">
+                $("#edit-nav").removeClass("bordered");
+            </script>
+        <% end %>
+    <% else %>
+        <script type="text/javascript">
+            // console.log("  $('#edit-nav').attr('class'): " +  $('#edit-nav').attr('class'));
+            $("#edit-nav").removeClass("bordered");
+        </script>
+    <% end %>
+
+    <% if @current_user %>
+        <% if @mode == "profile" %>
+            <li><%= link_to 'home', home_path(@current_user), id: "home", class: "edit-link" %></li>
+            <li><%= link_to 'edit', edit_user_path(@current_user), id: "editUser", class: "edit-link" %></li>
+            <script type="text/javascript">
+                $("#edit-nav").addClass("bordered");
+            </script>
+        <% elsif @mode == "newPhoto" %>
+            <script type="text/javascript">
+                console.log("  $('#edit-nav'): " +  $('#edit-nav').classList());
+                $("#edit-nav").removeClass("bordered");
+            </script>
+        <% end %>
+    <% end %>
+
+<% end %>

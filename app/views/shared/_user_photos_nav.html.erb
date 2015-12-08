@@ -1,0 +1,17 @@
+<!-- ======= ======= ======= content_for ======= ======= ======= -->
+<% content_for :user_photos_nav do %>
+    <% puts "******* _user_photos_nav " + "*" * 21 %>
+    <% puts "     ** @mode " + @mode.to_s %>
+
+    <% if @mode == "loginUser" %>
+        <ul class="navspacer"><li>&nbsp;</li></ul>
+        <ul class="photosnav bordered">
+
+            <li><a data-no-turbolink="true" href='javascript:void(0)' class="nav-link" id="photos" >photos</a>
+                <ul>
+                    <li><%= link_to 'new photo', new_user_photo_path(@current_user), class: "nav-link action", id: "add-photo" %></li>
+                </ul>
+            </li>
+        </ul>
+    <% end %>
+<% end %>

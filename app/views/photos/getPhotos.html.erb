@@ -1,0 +1,25 @@
+<h1>All User Photos</h1>
+
+<h3><%= link_to "Add Photo", new_user_photo_path(@current_user) %></h3>
+
+<% if @photos.length > 0 %>
+    <!-- <div class="photos"> -->
+        <table class="photo-display">
+            <% user = @current_user %>
+            <% @photos.each do |photo| %>
+                <tr><td>
+                    <div>
+                        <h3><%= link_to photo.title, user_photo_path(@current_user, photo) %></h3>
+                        <div><%= image_tag photo.source,  class: "current-photo", alt: photo.title %></div>
+                    </div>
+                </td></tr>
+                <tr><td>
+                    <div>
+                        <p><%= photo.caption %> caption </p>
+                        <p><%= photo.loc_taken %> loc_taken </p>
+                    </div>
+                </td></tr>
+            <% end %>
+        </table>
+    <!-- </div> -->
+<% end %>

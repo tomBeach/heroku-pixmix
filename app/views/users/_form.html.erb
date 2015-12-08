@@ -1,0 +1,21 @@
+<%= form_for @user do |f| %>
+    <div class="formData"><p class="formLabel">user name</p><%= f.text_field :user_name, value: @user.user_name %></div>
+    <div class="formData"><p class="formLabel">first name</p><%= f.text_field :first_name, value: @user.first_name %></div>
+    <div class="formData"><p class="formLabel">last name</p><%= f.text_field :last_name, value: @user.last_name %></div>
+    <div class="formData"><p class="formLabel">email</p><%= f.text_field :email, value: @user.email %></div>
+    <div class="formData"><p class="formLabel">password</p><%= f.text_field :password, value: @user.password %></div>
+    <div class="formData"><p class="formLabel">confirm</p><%= f.text_field :password_confirmation, value: @user.password %></div>
+    <div class="formData"><p class="formLabel"><%= f.submit :Enter %></p></div>
+    <div class="formData"><p class="formLabel">&nbsp;</p></div>
+
+<% end %>
+<% if @user.errors.any? %>
+    <div id="error_explanation">
+        <h2><%= pluralize(@user.errors.count, "error") %> prohibited user from being saved:</h2>
+        <ul>
+            <% @user.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>

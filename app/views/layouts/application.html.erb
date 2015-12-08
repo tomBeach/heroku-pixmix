@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+        <title>Pixmix3</title>
+
+        <!-- ======= ======= ======= styles ======= ======= ======= -->
+        <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+        <%= csrf_meta_tags %>
+		<%= Gon::Base.render_data %>
+		<link href='https://fonts.googleapis.com/css?family=Slackey|Special+Elite|Fredericka+the+Great|Short+Stack' rel='stylesheet' type='text/css'>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<!-- <script type="text/javascript" src="jquery.serializejson.js"></script> -->
+
+		<!-- ======= ======= ======= scripts ======= ======= ======= -->
+        <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
+
+	</head>
+	<body>
+
+		<!-- ======= ======= ======= header ======= ======= ======= -->
+		<div class="row header">
+			<div class="column column-12 logo">pixmix</div>
+		</div>
+
+		<!-- ======= ======= ======= content ======= ======= ======= -->
+		<div class="row content">
+
+			<!-- ======= ======= ======= sidebar ======= ======= ======= -->
+			<div class="column column-2 sidebar">
+				<div class="row side-text" id="user-name">
+					<nav id="side-nav" class="bordered">
+						<ul class="navbar">
+							<% if @current_user %>
+								<li><%= link_to (@user_name + " home"), home_path(), id: "home-link", class: "nav-link" %></li>
+							<% else %>
+								<li><%= link_to 'pixmix', home_path(), id: "home-link", class: "nav-link" %></li>
+							<% end %>
+						</ul>
+					</nav>
+				</div>
+				<div class="row side-text" id="spacer">
+					<div id="notice"><p><%= notice %>&nbsp;</p></div>
+				</div>
+				<div class="row side-text" id="side-title">
+					<p id="photo-title">&nbsp;
+						<!-- ======= title ======= -->
+					</p>
+				</div>
+				<div class="row side-text" id="info-column">
+			        <div class="column">
+						<div class="row">
+							<div id="photo-info">
+								<!-- ======= info ======= -->
+							</div>
+			            </div>
+			            <div class="row">
+			                <nav id="photo-edit">
+								<!-- ======= edit-nav ======= -->
+			                </nav>
+			            </div>
+			        </div>
+				</div>
+		    </div>
+
+			<!-- ======= ======= ======= display ======= ======= ======= -->
+			<div class="column column-10 display">
+
+				<!-- ======= ======= ======= navbar ======= ======= ======= -->
+				<div class="row navbar">
+					<nav id="main-nav">
+						<%= render "shared/user_main_nav2" %>
+						<%= yield :user_main_nav2 %>
+
+						<%= render "shared/user_photos_nav" %>
+						<%= yield :user_photos_nav %>
+
+						<%= render "shared/user_select_nav" %>
+						<%= yield :user_select_nav %>
+					</nav>
+				</div>
+
+				<!-- ======= ======= ======= info row ======= ======= ======= -->
+				<div id="infoRow" class="row info">
+					<div class="row info-tag-row genre">
+						<div class="selection-title group">&nbsp;</div>
+						<div class="column selection-text" id="genre-selections">&nbsp;</div>
+					</div>
+					<div class="row info-tag-row group">
+						<div class="selection-title tag">&nbsp;</div>
+						<div class="column selection-text" id="group-selections">&nbsp;</div>
+					</div>
+					<div class="row info-tag-row tag">
+						<div class="selection-title genre">&nbsp;</div>
+						<div class="column selection-text" id="tag-selections">&nbsp;</div>
+					</div>
+				</div>
+
+				<!-- ======= ======= ======= dynamic-content ======= ======= ======= -->
+				<div id="dynamic-content" class="row">
+					<%= yield %>
+				</div>
+			</div>
+		</div>
+
+		<!-- ======= ======= ======= footer ======= ======= ======= -->
+		<div class="row footer">
+			<div class="column column-12">
+				<!-- <div id="notice"><p><%#= notice %>&nbsp;</p></div> -->
+            </div>
+		</div>
+
+	</body>
+</html>

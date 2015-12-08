@@ -1,0 +1,15 @@
+<% @page_title = "Show Profile" %>
+
+<div class="form-column profile">
+    <h1>Profile</h1>
+    <div class="tag-edits photo-form">
+        <%= form_tag( edit_user_path(@current_user), :method => "get") do %>
+            <div class="formData"><p class="formLabel">user name</p><%= @user.user_name %></div>
+            <div class="formData"><p class="formLabel">first name</p><%= @user.first_name %></div>
+            <div class="formData"><p class="formLabel">last name</p><%= @user.last_name %></div>
+            <div class="formData"><p class="formLabel">last name</p><%= @user.email %></div>
+            <div class="formData"><p class="formLabel"><%= submit_tag("edit") %></p></div>
+            <div class="formData"><p class="formLabel">&nbsp;</p></div>
+        <% end %>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+<!-- ======= ======= ======= content_for ======= ======= ======= -->
+<% content_for :user_select_nav do %>
+    <% puts "******* _user_select_nav " + "*" * 21 %>
+    <% puts "     ** @mode " + @mode.to_s %>
+
+    <% if @mode == "loginUser" %>
+        <ul class="navspacer"><li>&nbsp;</li></ul>
+        <ul class="selectnav bordered">
+
+            <!-- ======= genres =======  -->
+            <% if @genres %>
+                <li><a data-no-turbolink="true" href='javascript:void(0)' class="nav-link" id="genre" >genre</a>
+                    <ul>
+                        <li><a href='javascript:void(0)' class="nav-link action" id="edit-genre">edit</a></li>
+                        <% @genres.each do |genre| %>
+                            <li><a href='javascript:void(0)' class="sub-link sub-link-genre" id="genre-<%= genre.name %>"><%= genre.name %></a></li>
+                        <% end %>
+                    </ul>
+                </li>
+            <% else %>
+                <li><a data-no-turbolink="true" href='javascript:void(0)' class="nav-link toggled" id="genre" >genres</a></li>
+            <% end %>
+
+            <!-- ======= groups =======  -->
+            <% if @groups.length > 0 %>
+                <li><a data-no-turbolink="true" href='javascript:void(0)' class="nav-link" id="group" >group</a>
+                    <ul>
+                        <li><a data-no-turbolink="true" href='javascript:void(0)' class="nav-link action" id="edit-group">edit</a></li>
+                        <% @groups.each do |group| %>
+                            <li><a href='javascript:void(0)' class="sub-link sub-link-group" id="group-<%= group.name %>"><%= group.name %></a></li>
+                        <% end %>
+                    </ul>
+                </li>
+            <% end %>
+
+            <!-- ======= tags =======  -->
+            <% if @tags.length > 0 %>
+                <li><a data-no-turbolink="true" href='javascript:void(0)' class="nav-link" id="tag" >tag</a>
+                    <ul>
+                        <li><a data-no-turbolink="true" href='javascript:void(0)' class="nav-link action" id="edit-tag" >edit</a></li>
+                        <% @tags.each do |tag| %>
+                            <li><a href='javascript:void(0)' class="sub-link sub-link-tag" id="tag-<%= tag.name %>" ><%= tag.name %></a></li>
+                        <% end %>
+                    </ul>
+                </li>
+            <% end %>
+
+            <!-- ======= selects =======  -->
+            <li class="toggled selections"><a data-no-turbolink="true" href='javascript:void(0)' class="nav-link toggled" id="select" >select</a></li>
+
+        </ul>
+    <% end %>
+<% end %>

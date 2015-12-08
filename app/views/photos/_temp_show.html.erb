@@ -1,0 +1,155 @@
+<% if @genres %>
+    <ul class="tag-list">
+        <% @genres.each do |genre| %>
+            <li class="cat-select"><input type="checkbox" id="genre-<%= genre.name %>" /><label for="test1"><%= genre.name %></label</li>
+        <% end %>
+    </ul>
+<% else %>
+    <p>no genres yet</p>
+<% end %>
+
+
+
+
+/* Base for label styling */
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+  position: absolute;
+  left: -9999px;
+}
+[type="checkbox"]:not(:checked) + label,
+[type="checkbox"]:checked + label {
+  position: relative;
+  // padding-left: 25px;
+  cursor: pointer;
+}
+
+/* checkbox aspect */
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before {
+  content: '';
+  position: absolute;
+  // left:0; top: 2px;
+  width: 17px; height: 17px;
+  border: 1px solid #aaa;
+  background: #f8f8f8;
+  border-radius: 1px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.3)
+}
+/* checked mark aspect */
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+  content: '✔';
+  position: absolute;
+  // top: 0; left: 4px;
+  font-size: 14px;
+  color: #09ad7e;
+  transition: all .2s;
+}
+/* checked mark aspect changes */
+[type="checkbox"]:not(:checked) + label:after {
+  opacity: 0;
+  transform: scale(0);
+}
+[type="checkbox"]:checked + label:after {
+  opacity: 1;
+  transform: scale(1);
+}
+/* disabled checkbox */
+[type="checkbox"]:disabled:not(:checked) + label:before,
+[type="checkbox"]:disabled:checked + label:before {
+  box-shadow: none;
+  border-color: #bbb;
+  background-color: #ddd;
+}
+[type="checkbox"]:disabled:checked + label:after {
+  color: #999;
+}
+[type="checkbox"]:disabled + label {
+  color: #aaa;
+}
+/* accessibility */
+[type="checkbox"]:checked:focus + label:before,
+[type="checkbox"]:not(:checked):focus + label:before {
+  border: 1px dotted blue;
+}
+
+/* hover style just for information */
+label:hover:before {
+  border: 1px solid #4778d9!important;
+}
+
+
+
+<!-- ======= ======= ======= photo column ======= ======= =======   -->
+<div class="column column-7 photos">
+    <nav id="edit-nav">
+        <ul class="navbar">
+            <% if @photo %>
+                <li><%= link_to 'back', user_photos_path(), id: "editPhoto", class: "edit-link" %></li>
+                <li><%= link_to 'edit', edit_user_photo_path(), id: "editPhoto", class: "edit-link" %></li>
+                <li><%= link_to 'delete', user_photo_path(), method: :delete, id: "deletePhoto", class: "edit-link" %></li>
+                <li><p class="edit-link"><%= @photo.loc_taken %> location </p></li>
+                <li><p class="edit-link"<%= @photo.date_taken %> date taken </p></li>
+                <li><p class="edit-link"<%= @photo.wt_ht %> width/height </p></li>
+                <li><p class="edit-link"<%= @photo.rating %> rating </p></li>
+            <% end %>
+        </ul>
+    </nav>
+    <%= image_tag @photo.source,  class: "current-photo", alt: @photo.title %>
+</div>
+
+<!-- ======= ======= ======= data column ======= ======= =======   -->
+<div class="column column-5 tag-column">
+    <form action="#">
+
+        <!-- ======= ======= ======= genres ======= ======= =======   -->
+        <div class="column column-4 tag-selections">
+            <div class="tag-title genre">genre</div>
+            <div>
+            <% if @genres %>
+                <ul>
+                    <% @genres.each do |genre| %>
+                        <li class="cat-check genre"><input type="checkbox" id="genre-<%= genre.name %>" /><label for="test1"><%= genre.name %></label</li>
+                    <% end %>
+                </ul>
+            <% else %>
+                <p>no genres yet</p>
+            <% end %>
+            </div>
+        </div>
+
+        <!-- ======= ======= ======= groups ======= ======= =======   -->
+        <div class="column column-4 tag-selections">
+            <div class="tag-title group">group</div>
+            <div>
+                <% if @groups %>
+                    <ul>
+                        <% @groups.each do |group| %>
+                            <li class="cat-check group"><input type="checkbox" id="group-<%= group.name %>" /><label for="test1"><%= group.name %></label</li>
+                        <% end %>
+                    </ul>
+                <% else %>
+                    <p>no groups yet</p>
+                <% end %>
+            </div>
+        </div>
+
+        <!-- ======= ======= ======= tags ======= ======= =======   -->
+        <div class="column column-4 tag-selections">
+            <div class="tag-title tag">tag</div>
+            <div>
+                <form action="#">
+                <% if @tags %>
+                    <ul>
+                        <% @tags.each do |tag| %>
+                            <li class="cat-check tag"><input type="checkbox" id="tag-<%= tag.name %>" /><label for="test1"><%= tag.name %></label</li>
+                        <% end %>
+                    </ul>
+                <% else %>
+                    <p>no tags yet</p>
+                <% end %>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,13 @@
+    <% @page_title = "UserAuth | Login" %>
+
+    <div class="form-column login">
+        <h1>Log in</h1>
+        <div class="tag-edits photo-form">
+            <%= form_tag(:action => 'login_attempt', :id => "loginForm") do %>
+                <div class="formData"><p class="formLabel">username/email</p><%= text_field_tag(:user_name_or_email, value = "") %></div>
+                <div class="formData"><p class="formLabel">password</p><%= password_field_tag(:login_password, value ="") %></div>
+                <div class="formData"><p class="formLabel"><%= submit_tag("Log In") %></p></div>
+                <div class="formData"><p class="formLabel"><%= hidden_field_tag("mode", value ="loginUser") %></p></div>
+            <% end %>
+        </div>
+    </div>

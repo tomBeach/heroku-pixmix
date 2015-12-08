@@ -1,0 +1,5 @@
+<% if @photo %>
+    <%= @photo.title %>
+<% elsif @photos %>
+    <%= @current_user.user_name + " home"%>
+<% end %>

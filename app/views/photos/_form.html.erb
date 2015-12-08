@@ -1,0 +1,18 @@
+<div id='photo-grid'>
+    <%= form_for [@current_user, @photo], :remote => true do |f| %>
+
+        <!-- ======= ======= ======= new-photo column ======= ======= =======   -->
+        <div class="column column-6 photo-column">
+            <div class="tag-edits photo-form">
+                <div class="formData"><p class="formLabel">source</p><%= f.text_field :source, size: "30" %></div>
+                <div class="formData"><p class="formLabel">title</p><%= f.text_field :title, size: "25" %> </div>
+                <div class="formData"><p class="formLabel">location</p><%= f.text_field :loc_taken, size: "20" %></div>
+                <div class="formData"><p class="formLabel">date</p><%= f.text_field :date_taken, size: "15" %></div>
+                <div class="formData"><p class="formLabel">wt/ht</p><%= f.text_field :wt_ht, size: "10" %></div>
+                <div class="formData"><p class="formLabel">rating</p><%= f.text_field :rating, size: "2" %></div>
+                <div class="formData"><p class="formLabel"></p><%= f.submit value: "submit" %></div>
+                <div class="formData"><p class="formLabel">caption</p><%= f.text_area :caption, cols: "30", rows: "7" %></div>
+            </div>
+        </div>
+    <% end %>
+</div>
