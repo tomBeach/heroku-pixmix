@@ -44,14 +44,22 @@ class ApplicationController < ActionController::Base
 
     def get_random_photo
         puts "******* get_random_photo " + "*" * 21
-        random_record = rand(Photo.count)
+        puts "**      Photo.count " + Photo.count.to_s
+        if Photo.count > 0
+            random_record = rand(Photo.count)
+        else
+            random_record = 0
+        end
+        puts "**      random_record " + random_record.to_s
         if random_record > 0
+            puts "**      random_record > 0 **"
             random_id = Photo.order(:id).offset(random_record).limit(1).first.id
             @photo = Photo.find_by_id(random_id)
             # binding.pry
             puts random_record
             return @photo
         end
+        puts "**      @photo " + @photo.to_s
     end
 
     protected
