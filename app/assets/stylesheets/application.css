@@ -336,8 +336,7 @@ h1 {
 }
 
  /* ======= main-nav details ======= */
-.nav-link#
- {
+.nav-link {
     color: gray;
 }
 #main-nav ul #title-text {
