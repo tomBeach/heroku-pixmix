@@ -1,5 +1,5 @@
 <% if @photo %>
     <div class="photo-column"><%= image_tag @photo.source,  class: "current-photo", alt: @photo.title %></div>
 <% else %>
-    <div class="photo-column">Random photos from your collection will appear here once in the database.</div>
+    <div class="photo-column">No photos in the collection yet... Load some!</div>
 <% end %>
