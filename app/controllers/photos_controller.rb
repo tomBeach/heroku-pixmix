@@ -100,7 +100,6 @@ class PhotosController < ApplicationController
         getPhoto
     end
 
-    # def show
     def getPhoto
         puts "******* getPhoto " + "*" * 21
         puts "     ** params " + params.to_s
@@ -266,9 +265,13 @@ class PhotosController < ApplicationController
         @photo = @current_user.photos.build(photo_params)
 
         if @photo.save
+            puts "**     photo SAVED "
             flash[:notice] = "New photo saved!"
+            @mode = "loginUser"
+            gon.mode = @mode
             render :js => "menuObject.getThumbnailPhoto(#{@photo.id.to_s})"
         else
+            puts "**     photo NOT saved "
             flash[:notice] = "New photo failed"
             redirect_to({ :controller => 'photos', :action => 'new' })
         end

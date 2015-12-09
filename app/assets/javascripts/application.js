@@ -120,6 +120,8 @@ $(document).ready(function() {
         var thumbnailArray = [];
 
         $("#dynamic-content").empty();
+
+        // == create thumbnail grid
         if (jsonData.length > 0) {
             displayString = "<div id='photo-grid'>";
             displayString += "<div class='row'>";
@@ -148,17 +150,19 @@ $(document).ready(function() {
                 displayString += "<a href='javascript:void(0)' id='photo_" + i + "' width='" + nextW + "' height='" + nextH + "'>";
                 displayString += "<img id='" + nextPhoto.id + "' class='thumbnail' src=\"" + nextPhotoSource + "\" width='" + nextW + "' height='" + nextH + "'  alt ='" + nextPhoto.title + "'></a></div>";
             }
+            displayString += "</div></div>";
+
+        // == no photos meet category message
         } else {
-            displayString += "<div class='form-column login'>";
+            displayString = "<div class='form-column login'>";
             displayString += "<div class='tag-edits photo-form'>";
             displayString += "<div class='formData'><p>No photos match those categories</p>";
             displayString += "</div></div></div>"
         }
-        displayString += "</div></div>";
         $("#dynamic-content").append(displayString);
         this.thumbnailArray = thumbnailArray;
 
-        // ======= get all user photos =======
+        // ======= get selected thumbnail photo =======
         $("#photo-grid").on("click", null, function(){
             console.log("-- tootips");
             menuObject.getThumbnailPhoto(event.target.id);
