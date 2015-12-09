@@ -475,7 +475,7 @@ $(document).ready(function() {
 
         console.dir(photoDataObject);
 
-        var url = "http://localhost:3000/updatePhoto/" + this.currentPhoto.id;
+        var url = currentServerUrl + "updatePhoto/" + this.currentPhoto.id;
 
         $.ajax({
             url: url,
@@ -811,7 +811,7 @@ $(document).ready(function() {
         console.log("editSelectionTags");
 
         var self = this;
-        var url = "http://localhost:3000/" + whichCategory + "s";
+        var url = currentServerUrl + whichCategory + "s";
 
         $.ajax({
             url: url,
@@ -831,7 +831,7 @@ $(document).ready(function() {
         console.log("getUserPhotos");
 
         var self = this;
-        var url = "http://localhost:3000/getUserPhotos";
+        var url = currentServerUrl + "getUserPhotos";
 
         $.ajax({
             url: url,
@@ -859,7 +859,7 @@ $(document).ready(function() {
         var whichGroup = displayObject.group.selections;
         var whichTag = displayObject.tag.selections;
 
-        var url = "http://localhost:3000/getSelectedPhotos";
+        var url = currentServerUrl + "getSelectedPhotos";
 
         $.ajax({
             url: url,
@@ -884,7 +884,7 @@ $(document).ready(function() {
 
         $(displayObject.tooltips.element).text("");
         displayObject.selectionTagsArray = null;
-        var url = "http://localhost:3000/getPhoto/" + whichThumbnail;
+        var url = "https://whispering-refuge-6130.herokuapp.com/getPhoto/" + whichThumbnail;
 
         $.ajax({
             url: url,
@@ -924,10 +924,14 @@ $(document).ready(function() {
 
     menuObject = new Menu("menu1");
     displayObject = new Display("display1");
-    displayObject.initDisplayDivs();
-    menuObject.updateMenu(gon.mode);
+    var currentServerUrl = gon.currentServerUrl;
+
     console.log("** gon.mode: " + gon.mode);
     console.log("** gon.userId: " + gon.userId);
+    console.log("** currentServerUrl: " + currentServerUrl);
+
+    displayObject.initDisplayDivs();
+    menuObject.updateMenu(gon.mode);
     if (menuObject.userId == null) {
         menuObject.userId = gon.userId;
     }

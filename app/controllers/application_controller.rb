@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception
+    before_filter :getServerUrl
     before_filter :get_current_user
     # before_filter :show_mode, :except => [:get_current_user]
     helper FlashHelper
@@ -9,6 +10,13 @@ class ApplicationController < ActionController::Base
     # users modes: "loginUser", "users", "signup", "editUser"
     # photos modes: "userPhotos", "showPhoto", "editPhoto", "updatePhoto", "newPhoto"
     # categories modes: "editCategory"
+
+    def getServerUrl
+        puts "******* getServerUrl " + "*" * 21
+        reqUrl = request.original_url
+        puts "     ** reqUrl " + reqUrl
+        gon.currentServerUrl = reqUrl
+    end
 
     def show_mode
         puts "******* show_mode " + "*" * 21
@@ -54,8 +62,6 @@ class ApplicationController < ActionController::Base
 
     def get_random_photo
         puts "******* get_random_photo " + "*" * 21
-        reqUrl = request.original_url
-        puts "     ** reqUrl " + reqUrl
         if Photo.count > 0
             random_record = rand(Photo.count)
         else
