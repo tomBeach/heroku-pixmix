@@ -16,10 +16,10 @@ class PhotosController < ApplicationController
                     photoDataObject = Hash["photo" => "", "photoWH" => "", "userID" => 0]
                     sourceType = nextPhoto.source[0...4]
                     puts "    ** sourceType " + sourceType
-                    if sourceType == "http"
+                    if sourceType == "http" || sourceType == "https"
                         photo_source = nextPhoto.source
-                    else
-                        photo_source = "/app/assets/images/#{nextPhoto.source}"
+                    # else
+                    #     photo_source = "/app/assets/images/#{nextPhoto.source}"
                     end
                     puts "    ** photo_source " + photo_source
                     photoWH = FastImage.size(photo_source)
@@ -76,10 +76,10 @@ class PhotosController < ApplicationController
                 photoDataObject = Hash["photo" => "", "photoWH" => "", "userID" => 0]
                 sourceType = nextPhoto.source[0...4]
                 puts "    ** sourceType " + sourceType
-                if sourceType == "http"
+                if sourceType == "http" || sourceType == "https"
                     photo_source = nextPhoto.source
-                else
-                    photo_source = "/app/assets/images/#{nextPhoto.source}"
+                # else
+                #     photo_source = "/app/assets/images/#{nextPhoto.source}"
                 end
                 puts "    ** photo_source " + photo_source
                 photoWH = FastImage.size(photo_source)
