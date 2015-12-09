@@ -21,6 +21,7 @@ $(document).ready(function() {
         this.selectionTagsArray = null;
         this.thumbnailArray = null;
         this.currentPhoto = null;
+        this.hostUrl = null;
         this.tooltipsLinks = [$("#photos"), $("#genre"), $("#group"), $("#tag"), $("#select")]
         this.tooltipsText = {
             photos: "view, add or delete photos",
@@ -475,7 +476,7 @@ $(document).ready(function() {
 
         console.dir(photoDataObject);
 
-        var url = currentServerUrl + "/updatePhoto/" + this.currentPhoto.id;
+        var url = displayObject.hostUrl + "updatePhoto/" + this.currentPhoto.id;
 
         $.ajax({
             url: url,
@@ -811,7 +812,7 @@ $(document).ready(function() {
         console.log("editSelectionTags");
 
         var self = this;
-        var url = currentServerUrl + whichCategory + "s";
+        var url = displayObject.hostUrl + whichCategory + "s";
 
         $.ajax({
             url: url,
@@ -831,7 +832,7 @@ $(document).ready(function() {
         console.log("getUserPhotos");
 
         var self = this;
-        var url = currentServerUrl + "/getUserPhotos";
+        var url = displayObject.hostUrl + "getUserPhotos";
         console.log("  url: " + url);
 
         $.ajax({
@@ -860,7 +861,7 @@ $(document).ready(function() {
         var whichGroup = displayObject.group.selections;
         var whichTag = displayObject.tag.selections;
 
-        var url = currentServerUrl + "/getSelectedPhotos";
+        var url = displayObject.hostUrl + "getSelectedPhotos";
         console.log("  url: " + url);
 
         $.ajax({
@@ -883,11 +884,13 @@ $(document).ready(function() {
     // ======= ======= ======= getThumbnailPhoto ======= ======= =======
     Menu.prototype.getThumbnailPhoto = function(whichThumbnail) {
         console.log("getThumbnailPhoto");
+        console.log("  whichThumbnail: " + whichThumbnail);
 
         $(displayObject.tooltips.element).text("");
         displayObject.selectionTagsArray = null;
 
-        var url = currentServerUrl + "/getPhoto/" + whichThumbnail;
+        var url = displayObject.hostUrl + "getPhoto/" + whichThumbnail;
+        console.log("  url: " + url);
 
         $.ajax({
             url: url,
@@ -927,11 +930,31 @@ $(document).ready(function() {
 
     menuObject = new Menu("menu1");
     displayObject = new Display("display1");
+
+    // == manage server url for programatic routing
     var currentServerUrl = gon.currentServerUrl;
+    // var startUrl = currentServerUrl.indexOf("://");
+    // var baseUrl = currentServerUrl.slice(startUrl + 3, currentServerUrl.length);
+    // var endUrl = currentServerUrl.indexOf("/");
+    var endIndex = getPosition(currentServerUrl, "/", 3);
+    var hostUrl = currentServerUrl.slice(0, endIndex + 1);
+
+    function getPosition(string, m, i) {
+        return string.split(m, i).join(m).length;
+    }
+
+    if ((gon.mode == "logout") || (gon.mode == "guest")) {
+        displayObject.hostUrl = null
+    }
+    if (displayObject.hostUrl == null) {
+        displayObject.hostUrl = hostUrl;
+    }
 
     console.log("** gon.mode: " + gon.mode);
     console.log("** gon.userId: " + gon.userId);
+    console.log("** displayObject.hostUrl: " + displayObject.hostUrl);
     console.log("** currentServerUrl: " + currentServerUrl);
+    console.log("** hostUrl: " + hostUrl);
 
     displayObject.initDisplayDivs();
     menuObject.updateMenu(gon.mode);
