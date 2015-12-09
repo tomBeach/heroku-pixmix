@@ -832,6 +832,7 @@ $(document).ready(function() {
 
         var self = this;
         var url = currentServerUrl + "getUserPhotos";
+        console.log("  url: " + url);
 
         $.ajax({
             url: url,
@@ -860,6 +861,7 @@ $(document).ready(function() {
         var whichTag = displayObject.tag.selections;
 
         var url = currentServerUrl + "getSelectedPhotos";
+        console.log("  url: " + url);
 
         $.ajax({
             url: url,
@@ -884,7 +886,8 @@ $(document).ready(function() {
 
         $(displayObject.tooltips.element).text("");
         displayObject.selectionTagsArray = null;
-        var url = "https://whispering-refuge-6130.herokuapp.com/getPhoto/" + whichThumbnail;
+
+        var url = currentServerUrl + "getPhoto/" + whichThumbnail;
 
         $.ajax({
             url: url,
