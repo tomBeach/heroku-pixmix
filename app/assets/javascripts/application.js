@@ -536,13 +536,13 @@ $(document).ready(function() {
         for (i = 0; i < menuLength; i++) {
             menuLinkArray.push($(".nav-link").eq(i));
         }
-        this.loginOut.element = $("#loginOut");     // display user photos
-        this.photos.element = $("#photos");     // display user photos
-        this.genre.element = $("#genre");       // get photos by genre
-        this.group.element = $("#group");       // get photos by group
-        this.tag.element = $("#tag");           // get photos by tag
-        this.select.element = $("#select");     // activate selections
-        this.search.element = $("#search");     // search titles
+        this.loginOut.element = $("#loginOut");     // toggle login or logout
+        this.photos.element = $("#photos");         // display user photos
+        this.genre.element = $("#genre");           // get photos by genre
+        this.group.element = $("#group");           // get photos by group
+        this.tag.element = $("#tag");               // get photos by tag
+        this.select.element = $("#select");         // activate selections
+        this.search.element = $("#search");         // search titles
 
         console.log("$('#genre').children('li').length: " + $("#genre").children("li").length);
         console.log("$('#group').children('li').length: " + $("#group").children("li").length);
@@ -553,6 +553,7 @@ $(document).ready(function() {
     // ======= ======= ======= updateMenu ======= ======= =======
     Menu.prototype.updateMenu = function(whichMode) {
         console.log("updateMenu");
+        console.log("  whichMode: " + whichMode);
 
         switch(whichMode) {
             case "profile":
@@ -565,6 +566,9 @@ $(document).ready(function() {
                 displayObject.toggleSelectionLabels("hide");
                 break;
             case "users":
+                displayObject.toggleSelectionLabels("hide");
+                break;
+            case "editUser":
                 displayObject.toggleSelectionLabels("hide");
                 break;
             default:
@@ -916,6 +920,7 @@ $(document).ready(function() {
 
     menuObject = new Menu("menu1");
     displayObject = new Display("display1");
+    displayObject.initDisplayDivs();
     menuObject.updateMenu(gon.mode);
     console.log("** gon.mode: " + gon.mode);
     console.log("** gon.userId: " + gon.userId);

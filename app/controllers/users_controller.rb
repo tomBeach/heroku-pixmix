@@ -11,7 +11,6 @@ class UsersController < ApplicationController
             @tags = Tag.all
             @mode = "loginUser"
             gon.mode = @mode
-            puts "     ** home_session[:user_id] " + session[:user_id].to_s
             gon.userId = session[:user_id]
             gon.genres = make_selection_array(@genres)
             gon.groups = make_selection_array(@groups)
@@ -37,10 +36,12 @@ class UsersController < ApplicationController
     def create
         puts "******* create " + "*" * 21
         @user = User.new(user_params)
-        puts "     ** @user " + @user.user_name
         respond_to do |format|
             if @user.save
-                format.html { redirect_to home_path(@user), notice: 'New user created.' }
+                session[:user_id] = @user.id
+                @current_user = User.find session[:user_id]
+                # format.html { redirect_to home_path(@user), notice: 'New user created.' }
+                format.html { redirect_to home_path, notice: 'New user created.' }
             else
                 format.html { render :new }
             end
