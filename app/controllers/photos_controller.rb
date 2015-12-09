@@ -104,7 +104,7 @@ class PhotosController < ApplicationController
     def getPhoto
         puts "******* getPhoto " + "*" * 21
         puts "     ** params " + params.to_s
-        @mode = "show"
+        @mode = "showPhoto"
         gon.mode = @mode
 
         selectObject = Hash["id" => "0", "name" => "", "checked" => false]
@@ -151,8 +151,8 @@ class PhotosController < ApplicationController
     end
 
     def edit
-        puts "******* edit " + "*" * 21
-        @mode = "edit"
+        puts "******* editPhoto " + "*" * 21
+        @mode = "editPhoto"
         gon.mode = @mode
 
         @photo = @current_user.photos.find(params[:id])

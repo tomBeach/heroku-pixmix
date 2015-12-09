@@ -1,20 +1,20 @@
 User.delete_all
-@user2 = User.create(user_name: "teb", first_name: "Tom", last_name: "Beach", encrypted_password: "kjgf", password_digest: "ukft", salt: "kjgf", email: "tb12345")
+@user1 = User.create(user_name: "teb", first_name: "Tom", last_name: "Beach", encrypted_password: "kjgf", password_digest: "ukft", salt: "kjgf", email: "tb12345")
 
 Photo.delete_all
-@photo1 = Photo.create(user_id: 1, source: "http://i.dailymail.co.uk/i/pix/2014/12/04/23BBF14800000578-0-image-m-46_1417705558264.jpg", wt_ht: "634 × 513", title: "green cat", caption: "A green cat from Bulgaria", loc_taken: "Bulgaria", date_taken: "1/2/34", rating: "1")
+@photo1 = Photo.create(user_id: @user1.id, source: "http://i.dailymail.co.uk/i/pix/2014/12/04/23BBF14800000578-0-image-m-46_1417705558264.jpg", wt_ht: "634 × 513", title: "green cat", caption: "A green cat from Bulgaria", loc_taken: "Bulgaria", date_taken: "1/2/34", rating: "1")
 
-@photo2 = Photo.create(user_id: 1, source: "https://upload.wikimedia.org/wikipedia/commons/8/8e/Dozing_Geoffroy's_Cat.jpg", wt_ht: "3008 × 2000", title: "Geoffroy's cat", caption: "A wild cat native to the southern and central regions of South America.", loc_taken: "South America", date_taken: "3/4/56", rating: "2")
+@photo2 = Photo.create(user_id: @user1.id, source: "https://upload.wikimedia.org/wikipedia/commons/8/8e/Dozing_Geoffroy's_Cat.jpg", wt_ht: "3008 × 2000", title: "Geoffroy's cat", caption: "A wild cat native to the southern and central regions of South America.", loc_taken: "South America", date_taken: "3/4/56", rating: "2")
 
-@photo3 = Photo.create(user_id: 1, source: "https://upload.wikimedia.org/wikipedia/commons/8/88/Fishing_Cat_(Prionailurus_viverrinus)_3.jpg", wt_ht: "1600 × 1067", title: "Fishing cat", caption: "Fishing cats live foremost in the vicinity of wetlands, along rivers, streams, oxbow lakes and mangrove swamps. The fishing cat is the state animal of West Bengal", loc_taken: "West Bengal", date_taken: "4/5/67", rating: "3")
+@photo3 = Photo.create(user_id: @user1.id, source: "https://upload.wikimedia.org/wikipedia/commons/8/88/Fishing_Cat_(Prionailurus_viverrinus)_3.jpg", wt_ht: "1600 × 1067", title: "Fishing cat", caption: "Fishing cats live foremost in the vicinity of wetlands, along rivers, streams, oxbow lakes and mangrove swamps. The fishing cat is the state animal of West Bengal", loc_taken: "West Bengal", date_taken: "4/5/67", rating: "3")
 
-@photo4 = Photo.create(user_id: 1, source: "http://media1.santabanta.com/full1/Outdoors/Waterfalls/waterfalls-41a.jpg", wt_ht: "1600 × 1067", title: "Ithaca Falls", caption: "Ithaca Falls Ithaca NY", loc_taken: "Ithaca", date_taken: "4/5/67", rating: "3")
+@photo4 = Photo.create(user_id: @user1.id, source: "http://media1.santabanta.com/full1/Outdoors/Waterfalls/waterfalls-41a.jpg", wt_ht: "1600 × 1067", title: "Ithaca Falls", caption: "Ithaca Falls Ithaca NY", loc_taken: "Ithaca", date_taken: "4/5/67", rating: "3")
 
-@photo5 = Photo.create(user_id: 1, source: "https://www.keralatourism.org/images/destination/thumb/athirappalli_and_vazhachal_waterfalls_thrissur20131031102422_79_1.jpg", wt_ht: "1600 × 1067", title: "Fishing cat", caption: "huge waterfall in India", loc_taken: "India", date_taken: "4/5/67", rating: "3")
+@photo5 = Photo.create(user_id: @user1.id, source: "https://www.keralatourism.org/images/destination/thumb/athirappalli_and_vazhachal_waterfalls_thrissur20131031102422_79_1.jpg", wt_ht: "1600 × 1067", title: "Fishing cat", caption: "huge waterfall in India", loc_taken: "India", date_taken: "4/5/67", rating: "3")
 
-@photo6 = Photo.create(user_id: 1, source: "http://i869.photobucket.com/albums/ab256/crystalfalls/waterfalls-04.jpg", wt_ht: "1600 × 1067", title: "waterfall", caption: "caption", loc_taken: "paradise", date_taken: "4/5/67", rating: "3")
+@photo6 = Photo.create(user_id: @user1.id, source: "http://i869.photobucket.com/albums/ab256/crystalfalls/waterfalls-04.jpg", wt_ht: "1600 × 1067", title: "waterfall", caption: "caption", loc_taken: "paradise", date_taken: "4/5/67", rating: "3")
 
-@photo7 = Photo.create(user_id: 1, source: "http://www.mountainphotography.com/images/large/JackBrauer_plitvickaJezera.jpg", wt_ht: "1600 × 1067", title: "big waterfall", caption: "another waterfall", loc_taken: "tropics", date_taken: "4/5/67", rating: "3")
+@photo7 = Photo.create(user_id: @user1.id, source: "http://www.mountainphotography.com/images/large/JackBrauer_plitvickaJezera.jpg", wt_ht: "1600 × 1067", title: "big waterfall", caption: "another waterfall", loc_taken: "tropics", date_taken: "4/5/67", rating: "3")
 
 Genre.delete_all
 @genre1 = Genre.create(name:'studio')

@@ -4,6 +4,12 @@ class ApplicationController < ActionController::Base
     # before_filter :show_mode, :except => [:get_current_user]
     helper FlashHelper
 
+    # app modes: "guest"
+    # session modes: "loginUser", "logout", "profile"
+    # users modes: "loginUser", "users", "signup", "editUser"
+    # photos modes: "userPhotos", "showPhoto", "editPhoto", "updatePhoto", "newPhoto"
+    # categories modes: "editCategory"
+
     def show_mode
         puts "******* show_mode " + "*" * 21
         flash[:notice] = "Mode: " + @mode
@@ -22,10 +28,14 @@ class ApplicationController < ActionController::Base
         puts "******* get_current_user " + "*" * 21
         if session[:user_id]
             @current_user = User.find session[:user_id]
-            @user_name = @current_user.user_name
-            @mode = session[:mode]
-            gon.mode = @mode
-            return true
+            if @current_user
+                @user_name = @current_user.user_name
+                return true
+            else
+                @mode = "guest"
+                gon.mode = @mode
+                return false
+            end
         else
             @mode = "guest"
             gon.mode = @mode
