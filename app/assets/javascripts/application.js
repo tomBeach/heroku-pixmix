@@ -475,7 +475,7 @@ $(document).ready(function() {
 
         console.dir(photoDataObject);
 
-        var url = currentServerUrl + "updatePhoto/" + this.currentPhoto.id;
+        var url = currentServerUrl + "/updatePhoto/" + this.currentPhoto.id;
 
         $.ajax({
             url: url,
@@ -831,7 +831,7 @@ $(document).ready(function() {
         console.log("getUserPhotos");
 
         var self = this;
-        var url = currentServerUrl + "getUserPhotos";
+        var url = currentServerUrl + "/getUserPhotos";
         console.log("  url: " + url);
 
         $.ajax({
@@ -860,7 +860,7 @@ $(document).ready(function() {
         var whichGroup = displayObject.group.selections;
         var whichTag = displayObject.tag.selections;
 
-        var url = currentServerUrl + "getSelectedPhotos";
+        var url = currentServerUrl + "/getSelectedPhotos";
         console.log("  url: " + url);
 
         $.ajax({
@@ -887,7 +887,7 @@ $(document).ready(function() {
         $(displayObject.tooltips.element).text("");
         displayObject.selectionTagsArray = null;
 
-        var url = currentServerUrl + "getPhoto/" + whichThumbnail;
+        var url = currentServerUrl + "/getPhoto/" + whichThumbnail;
 
         $.ajax({
             url: url,
