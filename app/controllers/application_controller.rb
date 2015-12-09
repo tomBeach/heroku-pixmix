@@ -54,6 +54,8 @@ class ApplicationController < ActionController::Base
 
     def get_random_photo
         puts "******* get_random_photo " + "*" * 21
+        reqUrl = request.original_url
+        puts "     ** reqUrl " + reqUrl
         if Photo.count > 0
             random_record = rand(Photo.count)
         else
